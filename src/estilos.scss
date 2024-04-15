@@ -59,9 +59,9 @@ body {
         }
 
         &-title {
+            text-transform: capitalize;
             margin-top: 2rem;
             font-size: 1.8rem;
-
             span {
                 color: var(--dark-gray);
                 font-weight: 400;
@@ -74,6 +74,7 @@ body {
             font-size: 1.6rem;
             margin-top: 0;
             margin-bottom: 2rem;
+            text-transform: capitalize;
         }
 
     }

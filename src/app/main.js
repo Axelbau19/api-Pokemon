@@ -14,7 +14,11 @@ const pintCard = (pokemon) => {
     const frangm = document.createDocumentFragment();
     //setName
     cloneTemplate.querySelector('.card-body-img').setAttribute('src',pokemon.img);
-    cloneTemplate.querySelector('.card-body-title').innerHTML = `${pokemon.name}<span>26</span>`;
+    cloneTemplate.querySelector('.card-body-title').innerHTML = `${pokemon.name}<span> ${pokemon.hp} HP</span>`;
+    cloneTemplate.querySelector('.card-body-text').textContent = `${pokemon.exp} Exp`;
+    cloneTemplate.querySelector('.card-footer-social:nth-child(1) h3').textContent = pokemon.attack;
+    cloneTemplate.querySelector('.card-footer-social:nth-child(2) h3').textContent = pokemon.defense;
+    cloneTemplate.querySelector('.card-footer-social:nth-child(3) h3').textContent = pokemon.specialAttack;
     frangm.appendChild(cloneTemplate);
     flexBox.appendChild(frangm);
 } 
@@ -23,9 +27,15 @@ const fecthData = async(urlApi) =>{
     try{
         const response = await fetch(urlApi);
         const data = await response.json();
+        console.log(data);
         const pokemon = {
             img: data.sprites.other.dream_world.front_default,
-            name: data.name
+            name: data.name,
+            hp: data.stats[0].base_stat,
+            exp: data.base_experience,
+            attack: data.stats[1].base_stat,
+            defense:data.stats[2].base_stat,
+            specialAttack:data.stats[3].base_stat
         }
         pintCard(pokemon);
     }catch(error){
